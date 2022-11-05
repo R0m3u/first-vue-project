@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <section id="app">
+      <div class="game box">
+        <div class="player">
+          <p>Jogador</p>
+          <div class="life-p">
+            <div :style="[player, danger1]" class="bar-p"></div>
+          </div>
+          <p>{{playerLife}}%</p>
+        </div>
+        <div class="monster">
+          <p>Monstro</p>
+          <div class="life-m">
+            <div :style="[monster, danger2]" class="bar-m"></div>
+          </div>
+          <p>{{monsterLife}}%</p>
+        </div>
+      </div>
+      <div v-if="showResult" class="result box">
+        <p v-show="playerWon" class="won">Você ganhou! :(</p>
+        <p v-show="monsterWon" class="lost">Você perdeu! :(</p>
+      </div>
+      <div class="controls-panel box">
+        <div v-if="!start">
+          <button @click="init" class="start">INICIAR JOGO</button>
+        </div>
+        <div v-else>
+          <button @click="attack" class="attack">ATAQUE</button>
+          <button @click="specialAttack" class="attack-spc">
+            ATAQUE ESPECIAL
+          </button>
+          <button @click="cure" class="cure">CURAR</button>
+          <button @click="exit" class="give-up">DESISTIR</button>
+        </div>
+      </div>
+      <div class="logs box" v-if="log.length">
+        <p :class="logs.css" v-if="log.length" v-for="logs in log">{{logs.message}}</p>
+      </div>
+    </section>
+  </body>
+  <script src="https://unpkg.com/vue@2"></script>
+  <script src="/app.js"></script>
+ 
+</html>
